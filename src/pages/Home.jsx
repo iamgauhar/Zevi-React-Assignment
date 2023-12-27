@@ -1,8 +1,10 @@
 import React from 'react'
 import SearchBox from '../components/SearchBox'
 import LatestTrends from '../components/LatestTrends'
+import { useAllContext } from '../context/allContext'
 
 const Home = () => {
+    const { isFocused } = useAllContext()
     return (
         <div>
             <div className='h-screen relative'>
@@ -10,8 +12,10 @@ const Home = () => {
                 <div className='h-screen w-full absolute top-0 bg-white opacity-30 '>
                 </div>
                 <div className='w-full absolute top-20 '>
-                    <SearchBox />
-                    <LatestTrends />
+                    <div className='w-11/12 md:w-3/5 m-auto py-2 shadow-sm rounded-xl bg-white'>
+                        <SearchBox />
+                    </div>
+                    {isFocused ? <LatestTrends /> : ""}
                 </div>
             </div>
         </div>

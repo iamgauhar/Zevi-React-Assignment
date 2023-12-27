@@ -44,7 +44,7 @@ const LatestTrends = () => {
                     </div>
                 </div>
                 <div>
-                    <div><h1 className='font-semibold py-4 text-lg'>Latest Trends</h1></div>
+                    <div><h1 className='font-semibold py-4 text-lg'>Popular suggestions</h1></div>
                     <div>
                         {
                             products.map((el, i) => {
