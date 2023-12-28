@@ -3,9 +3,9 @@ import { ChevronDown, Star, X } from 'lucide-react';
 import { useAllContext } from '../context/allContext';
 
 const FilterTab = () => {
-    const { filter, setFilter, setRandomProducts, randomProducts, filterdProducts, setFilterdProducts, selectedRatings, setSelectedRatings } = useAllContext()
+    const { filter, setFilter, randomProducts, filterdProducts, setFilterdProducts, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
     const fiveStars = 5;
-    // const filledStars = Math.min(rating, fiveStars);
+
     // Function to handle changes in rating checkboxes
     const handleRatingChange = (rating) => {
         if (selectedRatings.includes(rating)) {
@@ -15,12 +15,40 @@ const FilterTab = () => {
         }
         console.log(selectedRatings)
     };
+
     const filterProductsByRating = () => {
         return randomProducts.filter((product) => selectedRatings.includes(product.rating));
     };
+
+    const handlePriceFilterChange = (filterType) => {
+        setPriceFilters((prevFilters) => ({
+            ...prevFilters,
+            [filterType]: !prevFilters[filterType],
+        }));
+    };
+
+    // Function to filter products based on the price range checkboxes
+    const filterProductsByPrice = () => {
+        return randomProducts.filter((product) => {
+            if (priceFilters.under500 && product.price <= 500) {
+                return true;
+            }
+            if (priceFilters.from1000to3000 && product.price >= 1000 && product.price <= 3000) {
+                return true;
+            }
+            if (priceFilters.from3000to5000 && product.price >= 3000 && product.price <= 5000) {
+                return true;
+            }
+            return false;
+        });
+    };
+
     useEffect(() => {
-        setFilterdProducts(filterProductsByRating)
-    }, [selectedRatings])
+        const filterByPrice = filterProductsByPrice()
+        const filterByRating = filterProductsByRating()
+        setFilterdProducts([...filterByPrice, ...filterByRating])
+        console.log(filterdProducts)
+    }, [selectedRatings, priceFilters])
 
     return (
         <div className={`w-[300px] fixed top-0 h-screen p-4 sm:p-0 ${filter ? "left-0" : "-left-full"} transition-all duration-500  bg-white z-40 md:relative md:left-0 `} >
@@ -46,14 +74,31 @@ const FilterTab = () => {
                     <ChevronDown className='w-4 h-4' />
                 </div>
                 <div>
-                    <input type="checkbox" name="price" id="" />
-                    <label className='ml-2 text-sm' htmlFor="price">Under 500</label>
+                    <input
+                        type="checkbox"
+                        id="under500"
+                        checked={priceFilters.under500}
+                        onChange={() => handlePriceFilterChange('under500')}
+                    />
+                    <label className='ml-2 text-sm' htmlFor="under500">Under 500</label>
                     <br />
-                    <input type="checkbox" name="price" id="" />
-                    <label className='ml-2 text-sm' htmlFor="price">1000 To 3000</label>
+
+                    <input
+                        type="checkbox"
+                        id="from1000to3000"
+                        checked={priceFilters.from1000to3000}
+                        onChange={() => handlePriceFilterChange('from1000to3000')}
+                    />
+                    <label className='ml-2 text-sm' htmlFor="from1000to3000">1000 To 3000</label>
                     <br />
-                    <input type="checkbox" name="price" id="" />
-                    <label className='ml-2 text-sm' htmlFor="price">3000 To 5000</label>
+
+                    <input
+                        type="checkbox"
+                        id="from3000to5000"
+                        checked={priceFilters.from3000to5000}
+                        onChange={() => handlePriceFilterChange('from3000to5000')}
+                    />
+                    <label className='ml-2 text-sm' htmlFor="from3000to5000">3000 To 5000</label>
                 </div>
             </div>
             <div className=' pb-4 pr-2'>
@@ -83,58 +128,6 @@ const FilterTab = () => {
                     ))}
                 </div>
 
-                {/* <div>
-                    <div className='flex items-center py-1'>
-                        <input className='mr-2' type="checkbox" name="mango" id="" value="5" />
-                        <label className='flex gap-1' htmlFor="mango">
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                        </label>
-                    </div>
-                    <div className='flex items-center py-1'>
-                        <input className='mr-2' type="checkbox" name="mango" id="" value="4" />
-                        <label className='flex gap-1' htmlFor="mango">
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                        </label>
-                    </div>
-                    <div className='flex items-center py-1'>
-                        <input className='mr-2' type="checkbox" name="mango" id="" value="3" />
-                        <label className='flex gap-1' htmlFor="mango">
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                        </label>
-                    </div>
-                    <div className='flex items-center py-1'>
-                        <input className='mr-2' type="checkbox" name="mango" id="" value="2" />
-                        <label className='flex gap-1' htmlFor="mango">
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                        </label>
-                    </div>
-                    <div className='flex items-center py-1'>
-                        <input className='mr-2' type="checkbox" name="mango" id="" value="1" />
-                        <label className='flex gap-1' htmlFor="mango">
-                            <Star className='text-amber-400 h-4 w-4' fill='#FFD700' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                            <Star className='text-amber-400 h-4 w-4' />
-                        </label>
-                    </div>
-                </div> */}
             </div>
         </div>
     )

@@ -11,7 +11,7 @@ const SearchBox = () => {
                     <input className='w-full h-full py-2 outline-none' onFocus={() => setIsFocused(true)} onBlur={() => {
                         setTimeout(() => {
                             setIsFocused(false)
-                        }, 100);
+                        }, 200);
                     }} type="search" placeholder='Search' />
                 </div>
                 <div>
