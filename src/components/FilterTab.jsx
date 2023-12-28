@@ -3,6 +3,7 @@ import { ChevronDown, Star, X } from 'lucide-react';
 import { useAllContext } from '../context/allContext';
 
 const FilterTab = () => {
+
     const { filter, setFilter, randomProducts, setFilterdProducts, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
     const fiveStars = 5;
 
@@ -16,10 +17,13 @@ const FilterTab = () => {
         console.log(selectedRatings)
     };
 
+    // Function to filter products based on the rating checkboxes
+
     const filterProductsByRating = () => {
         return randomProducts.filter((product) => selectedRatings.includes(product.rating));
     };
 
+    // Function to handle changes in price checkboxes
     const handlePriceFilterChange = (filterType) => {
         setPriceFilters((prevFilters) => ({
             ...prevFilters,
@@ -44,8 +48,11 @@ const FilterTab = () => {
     };
 
     useEffect(() => {
+
+        // Calling function on slecting filter checkbox
         const filterByPrice = filterProductsByPrice()
         const filterByRating = filterProductsByRating()
+
         setFilterdProducts([...filterByPrice, ...filterByRating])
 
     }, [selectedRatings, priceFilters, filterProductsByPrice, filterProductsByRating, setFilterdProducts])
@@ -56,6 +63,7 @@ const FilterTab = () => {
                 <X onClick={() => setFilter(false)} className='text-indigo-400 cursor-pointer md:hidden' />
             </div>
             <div className='border-b pb-4 pr-2'>
+                {/* Filter Based on BRANDs */}
                 <div className='flex justify-between py-2 items-center'>
                     <h1 className='font-semibold'>BRAND</h1>
                     <ChevronDown className='w-4 h-4' />
@@ -68,6 +76,7 @@ const FilterTab = () => {
                     <label className='ml-2 text-sm' htmlFor="h&m">H&M</label>
                 </div>
             </div>
+            {/* Filter based on Price range */}
             <div className='border-b pb-4 pr-2'>
                 <div className='flex justify-between py-2 items-center'>
                     <h1 className='font-semibold'>PRICE RANGE</h1>
@@ -101,6 +110,7 @@ const FilterTab = () => {
                     <label className='ml-2 text-sm' htmlFor="from3000to5000">3000 To 5000</label>
                 </div>
             </div>
+            {/* Filter base on Ratings UI */}
             <div className=' pb-4 pr-2'>
                 <div className='flex justify-between py-2 items-center'>
                     <h1 className='font-semibold'>RATINGS</h1>
@@ -108,6 +118,7 @@ const FilterTab = () => {
                 </div>
 
                 <div>
+                    {/* Mapping UI for filtering based on ratings */}
                     {[5, 4, 3, 2, 1].map((rating) => (
                         <div key={rating} className='flex items-center py-1'>
                             <input

@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Logo = () => {
+    // Brand Logo component
     return (
         <div className='absolute top-8 right-8 z-50 w-16'>
             <div>

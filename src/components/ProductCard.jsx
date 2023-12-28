@@ -5,6 +5,8 @@ import { useAllContext } from '../context/allContext';
 const ProductCard = ({ item }) => {
 
     const { randomProducts, setRandomProducts } = useAllContext()
+
+    // // Function to add products in wishlist
     const addToWishList = (id) => {
 
         const updatedProducts = randomProducts.map((pro) => {
@@ -35,10 +37,11 @@ const ProductCard = ({ item }) => {
                     <p className='pt-1'><strike className="text-gray-400">Rs. {Math.floor(item?.price)}</strike> <span className='font-semibold text-indigo-400' >Rs. {Math.floor(item?.price - (item?.price * 0.10))}</span></p>
                     <div className='flex gap-1 items-center py-1'>
                         <div className='flex gap-1 items-center'>
-
+                            {/* Printing product rating into stars */}
                             {Array.from({ length: 5 }).map((_, index) => {
                                 return <Star key={index} className={`text-amber-400 h-4 w-4 ${index < item?.rating ? 'fill-amber-400' : 'fill-transparent'}`} />
                             })}
+
                         </div>
                         <div className='text-xs'>({item?.ratingCount})</div>
                     </div>

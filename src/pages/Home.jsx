@@ -8,6 +8,7 @@ const Home = () => {
     const { isFocused } = useAllContext()
     return (
         <div>
+            {/* Imported Brand Logo here */}
             <Logo />
             <div className='h-screen relative'>
                 <img className='h-full w-full object-cover' src="https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
@@ -15,8 +16,10 @@ const Home = () => {
                 </div>
                 <div className='w-full absolute top-20 '>
                     <div className='w-11/12 md:w-3/5 m-auto py-2 shadow-sm rounded-xl bg-white'>
+                        {/* imported Search input here */}
                         <SearchBox />
                     </div>
+                    {/* And based on condition showing Trends Tab here */}
                     {isFocused ? <LatestTrends /> : ""}
                 </div>
             </div>

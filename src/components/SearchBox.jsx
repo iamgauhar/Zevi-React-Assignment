@@ -9,6 +9,8 @@ const SearchBox = () => {
 
                 <div className='w-full'>
                     <input className='w-full h-full py-2 outline-none' onFocus={() => setIsFocused(true)} onBlur={() => {
+                        // Not getting solution to hide trend tab and to handle click event
+                        // This is the temperory solution
                         setTimeout(() => {
                             setIsFocused(false)
                         }, 400);

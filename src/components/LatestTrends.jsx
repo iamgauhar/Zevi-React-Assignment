@@ -3,6 +3,8 @@ import TrendCard from './TrendCard'
 import { Link } from 'react-router-dom'
 
 const LatestTrends = () => {
+
+    // Just created dummy JSON data to show on trends tab
     const products = [
         {
             id: 1,
