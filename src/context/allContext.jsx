@@ -7,6 +7,8 @@ const AllContextProvider = ({ children }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [filter, setFilter] = useState(false);
     const [randomProducts, setRandomProducts] = useState([])
+    const [selectedRatings, setSelectedRatings] = useState([])
+    const [filterdProducts, setFilterdProducts] = useState([])
 
     return (
         <AllContext.Provider
@@ -14,6 +16,8 @@ const AllContextProvider = ({ children }) => {
                 isFocused, setIsFocused,
                 filter, setFilter,
                 randomProducts, setRandomProducts,
+                selectedRatings, setSelectedRatings,
+                filterdProducts, setFilterdProducts,
             }}
         >
             {children}

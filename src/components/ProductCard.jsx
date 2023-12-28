@@ -3,7 +3,7 @@ import { Star, Heart } from 'lucide-react';
 import { useAllContext } from '../context/allContext';
 
 const ProductCard = ({ item }) => {
-    // console.log(item.image)
+
     const { randomProducts, setRandomProducts } = useAllContext()
     const addToWishList = (id) => {
 
@@ -15,13 +15,9 @@ const ProductCard = ({ item }) => {
         });
 
         setRandomProducts(updatedProducts);
-        // const itemIndex = randomProducts.findIndex((pro) => {
-        //     return pro.id == id
-        // })
-        // randomProducts[itemIndex].whishList = true
 
     }
-    const rate = 4
+
     return (
         <div className='p-1 sm:p-2'>
             <div className=' w-[170px] sm:w-[190px] group cursor-pointer '>

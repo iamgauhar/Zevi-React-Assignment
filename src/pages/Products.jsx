@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import SearchBox from '../components/SearchBox'
 import ProductCard from '../components/ProductCard'
 import { Filter } from 'lucide-react';
@@ -7,8 +7,10 @@ import { generateProducts } from '../utils/fakeProductData';
 import FilterTab from '../components/FilterTab';
 
 const Products = () => {
-    const { filter, setFilter, randomProducts, setRandomProducts } = useAllContext()
+    const { setFilter, randomProducts, setRandomProducts, filterdProducts } = useAllContext()
     const productArray = []
+
+
     useEffect(() => {
 
         for (let i = 0; i < 25; i++) {
@@ -32,12 +34,16 @@ const Products = () => {
                 <FilterTab />
                 <div className='w-full flex justify-center gap-3 flex-wrap'>
                     {
-                        // randomProducts. ite
-                        randomProducts?.map((el, i) => [
-                            <ProductCard key={el.id} item={el} />
-                        ])
+
+                        filterdProducts.length > 0 ?
+                            filterdProducts?.map((el, i) => [
+                                <ProductCard key={el.id} item={el} />
+                            ])
+                            :
+                            randomProducts?.map((el, i) => [
+                                <ProductCard key={el.id} item={el} />
+                            ])
                     }
-                    <ProductCard />
                 </div>
             </div>
         </div>

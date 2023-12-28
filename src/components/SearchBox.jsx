@@ -8,7 +8,11 @@ const SearchBox = () => {
             <div className='flex justify-between items-center rounded-xl bg-white px-4 w-full'>
 
                 <div className='w-full'>
-                    <input className='w-full h-full py-2 outline-none' onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} type="search" placeholder='Search' />
+                    <input className='w-full h-full py-2 outline-none' onFocus={() => setIsFocused(true)} onBlur={() => {
+                        setTimeout(() => {
+                            setIsFocused(false)
+                        }, 100);
+                    }} type="search" placeholder='Search' />
                 </div>
                 <div>
                     <Search className='text-slate-400' />

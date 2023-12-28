@@ -1,5 +1,6 @@
 import React from 'react'
 import TrendCard from './TrendCard'
+import { Link } from 'react-router-dom'
 
 const LatestTrends = () => {
     const products = [
@@ -48,7 +49,7 @@ const LatestTrends = () => {
                     <div>
                         {
                             products.map((el, i) => {
-                                return <p key={i} className='text-sm cursor-pointer'>{el.title}</p>
+                                return <Link to='/products'><p key={i} className='text-sm cursor-pointer'>{el.title}</p></Link>
                             })
                         }
                     </div>
