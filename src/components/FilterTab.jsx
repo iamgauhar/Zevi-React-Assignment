@@ -3,7 +3,7 @@ import { ChevronDown, Star, X } from 'lucide-react';
 import { useAllContext } from '../context/allContext';
 
 const FilterTab = () => {
-    const { filter, setFilter, randomProducts, filterdProducts, setFilterdProducts, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
+    const { filter, setFilter, randomProducts, setFilterdProducts, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
     const fiveStars = 5;
 
     // Function to handle changes in rating checkboxes
@@ -47,8 +47,8 @@ const FilterTab = () => {
         const filterByPrice = filterProductsByPrice()
         const filterByRating = filterProductsByRating()
         setFilterdProducts([...filterByPrice, ...filterByRating])
-        console.log(filterdProducts)
-    }, [selectedRatings, priceFilters])
+
+    }, [selectedRatings, priceFilters, filterProductsByPrice, filterProductsByRating, setFilterdProducts])
 
     return (
         <div className={`w-[300px] fixed top-0 h-screen p-4 sm:p-0 ${filter ? "left-0" : "-left-full"} transition-all duration-500  bg-white z-40 md:relative md:left-0 `} >

@@ -5,6 +5,7 @@ import { Filter } from 'lucide-react';
 import { useAllContext } from '../context/allContext';
 import { generateProducts } from '../utils/fakeProductData';
 import FilterTab from '../components/FilterTab';
+import Logo from '../components/Logo';
 
 const Products = () => {
     const { setFilter, randomProducts, setRandomProducts, filterdProducts } = useAllContext()
@@ -23,6 +24,7 @@ const Products = () => {
 
     return (
         <div className=' px-4 sm:px-8 py-4'>
+            <Logo />
             <div className='border border-gray-400 m-auto md:w-2/5 rounded-md my-4'>
                 <SearchBox />
             </div>
