@@ -9,6 +9,7 @@ const AllContextProvider = ({ children }) => {
     const [randomProducts, setRandomProducts] = useState([])
     const [selectedRatings, setSelectedRatings] = useState([])
     const [filterdProducts, setFilterdProducts] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState([])
     const [priceFilters, setPriceFilters] = useState({
         under500: false,
         from1000to3000: false,
@@ -24,6 +25,7 @@ const AllContextProvider = ({ children }) => {
                 selectedRatings, setSelectedRatings,
                 filterdProducts, setFilterdProducts,
                 priceFilters, setPriceFilters,
+                selectedCategory, setSelectedCategory,
             }}
         >
             {children}

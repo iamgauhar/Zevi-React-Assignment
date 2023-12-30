@@ -4,8 +4,19 @@ import { useAllContext } from '../context/allContext';
 
 const FilterTab = () => {
 
-    const { filter, setFilter, randomProducts, setFilterdProducts, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
+    const { filter, setFilter, randomProducts, setFilterdProducts, selectedCategories, setSelectedCategories, selectedRatings, setSelectedRatings, priceFilters, setPriceFilters } = useAllContext()
     const fiveStars = 5;
+
+    // Function to handle changes in categories checkboxes
+    const handleCategoryChange = (category) => {
+        if (selectedCategories.includes(category)) {
+            // If category is already selected, remove it
+            setSelectedCategories(selectedCategories.filter(selectedCategory => selectedCategory !== category));
+        } else {
+            // If category is not selected, add it
+            setSelectedCategories([...selectedCategories, category]);
+        }
+    };
 
     // Function to handle changes in rating checkboxes
     const handleRatingChange = (rating) => {
@@ -17,11 +28,6 @@ const FilterTab = () => {
         console.log(selectedRatings)
     };
 
-    // Function to filter products based on the rating checkboxes
-
-    const filterProductsByRating = () => {
-        return randomProducts.filter((product) => selectedRatings.includes(product.rating));
-    };
 
     // Function to handle changes in price checkboxes
     const handlePriceFilterChange = (filterType) => {
@@ -31,28 +37,13 @@ const FilterTab = () => {
         }));
     };
 
-    // Function to filter products based on the price range checkboxes
-    const filterProductsByPrice = () => {
-        return randomProducts.filter((product) => {
-            if (priceFilters.under500 && product.price <= 500) {
-                return true;
-            }
-            if (priceFilters.from1000to3000 && product.price >= 1000 && product.price <= 3000) {
-                return true;
-            }
-            if (priceFilters.from3000to5000 && product.price >= 3000 && product.price <= 5000) {
-                return true;
-            }
-            return false;
-        });
-
-
-    };
     const filterProducts = () => {
         // Apply category filter
         let filteredProducts = randomProducts;
-        // if (selectedCategory) {
-        //     filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+        // if (selectedCategories.length > 0) {
+        //     filteredProducts = filteredProducts.filter(product =>
+        //         selectedCategories.includes(product.category)
+        //     );
         // }
 
         // Apply rating filter
@@ -84,13 +75,7 @@ const FilterTab = () => {
 
         filterProducts()
 
-        // Calling function on slecting filter checkbox
-        // const filterByPrice = filterProductsByPrice()
-        // const filterByRating = filterProductsByRating()
-
-        // setFilterdProducts([...filterByPrice, ...filterByRating])
-
-    }, [selectedRatings, priceFilters, filterProductsByPrice, filterProductsByRating, setFilterdProducts])
+    }, [selectedRatings, priceFilters, setFilterdProducts])
 
     return (
         <div className={`w-[300px] fixed top-0 h-screen p-4 sm:p-0 ${filter ? "left-0" : "-left-full"} transition-all duration-500  bg-white z-40 md:relative md:left-0 `} >
@@ -104,10 +89,10 @@ const FilterTab = () => {
                     <ChevronDown className='w-4 h-4' />
                 </div>
                 <div>
-                    <input type="checkbox" name="mango" id="" />
+                    <input type="checkbox" name="mango" id="" disabled />
                     <label className='ml-2 text-sm' htmlFor="mango">Mango</label>
                     <br />
-                    <input type="checkbox" name="h&m" id="" />
+                    <input type="checkbox" name="h&m" id="" disabled />
                     <label className='ml-2 text-sm' htmlFor="h&m">H&M</label>
                 </div>
             </div>

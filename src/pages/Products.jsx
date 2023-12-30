@@ -16,7 +16,11 @@ const Products = () => {
 
         for (let i = 0; i < 25; i++) {
             const data = generateProducts()
-            // setRandomProducts(randomProducts.push(data))
+            if (productArray.length % 2 == 0) {
+                data.brand = "H&M"
+            } else {
+                data.brand = "Mango"
+            }
             productArray.push(data)
         }
         setRandomProducts(productArray)
