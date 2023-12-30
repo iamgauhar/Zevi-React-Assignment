@@ -34,7 +34,7 @@ const ProductCard = ({ item }) => {
                 </div>
                 <div>
                     <h3 className='pt-1'>{item?.title}</h3>
-                    <p className='pt-1'><strike className="text-gray-400">Rs. {Math.floor(item?.price)}</strike> <span className='font-semibold text-indigo-400' >Rs. {Math.floor(item?.price - (item?.price * 0.10))}</span></p>
+                    <p className='pt-1'><strike className="text-gray-400">Rs. {Math.floor(+item?.price + (item?.price * 0.10))}</strike> <span className='font-semibold text-indigo-400' >Rs. {Math.floor(item?.price)}</span></p>
                     <div className='flex gap-1 items-center py-1'>
                         <div className='flex gap-1 items-center'>
                             {/* Printing product rating into stars */}
