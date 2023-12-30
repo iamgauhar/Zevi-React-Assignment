@@ -45,15 +45,50 @@ const FilterTab = () => {
             }
             return false;
         });
+
+
+    };
+    const filterProducts = () => {
+        // Apply category filter
+        let filteredProducts = randomProducts;
+        // if (selectedCategory) {
+        //     filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+        // }
+
+        // Apply rating filter
+        if (selectedRatings.length > 0) {
+            filteredProducts = filteredProducts.filter(product => selectedRatings.includes(product.rating));
+        }
+
+        // Apply price filter
+        if (priceFilters.under500 || priceFilters.from1000to3000 || priceFilters.from3000to5000) {
+            filteredProducts = filteredProducts.filter(product => {
+                if (priceFilters.under500 && product.price <= 500) {
+                    return true;
+                }
+                if (priceFilters.from1000to3000 && product.price >= 1000 && product.price <= 3000) {
+                    return true;
+                }
+                if (priceFilters.from3000to5000 && product.price >= 3000 && product.price <= 5000) {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        // Set the filtered products
+        setFilterdProducts(filteredProducts);
     };
 
     useEffect(() => {
 
-        // Calling function on slecting filter checkbox
-        const filterByPrice = filterProductsByPrice()
-        const filterByRating = filterProductsByRating()
+        filterProducts()
 
-        setFilterdProducts([...filterByPrice, ...filterByRating])
+        // Calling function on slecting filter checkbox
+        // const filterByPrice = filterProductsByPrice()
+        // const filterByRating = filterProductsByRating()
+
+        // setFilterdProducts([...filterByPrice, ...filterByRating])
 
     }, [selectedRatings, priceFilters, filterProductsByPrice, filterProductsByRating, setFilterdProducts])
 
